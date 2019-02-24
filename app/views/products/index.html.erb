@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Products</h1>
+
+<%= form_tag products_path, method: :get do %>
+  <%= label_tag :search %>
+  <%= text_field_tag :search, params[:search] %><br>
+
+  <br>
+
+  <%= label_tag :min_price %>
+  <%= text_field_tag :min_price, params.dig(:price, :min), name: 'price[min]' %><br>
+
+  <br>
+
+  <%= label_tag :max_price %>
+  <%= text_field_tag :max_price, params.dig(:price, :max), name: 'price[max]' %><br>
+
+  <br>
+
+  <%= submit_tag 'Search' %>
+  <%= link_to 'Clear', products_path %>
+<% end %>
+
+<br>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+        <td><%= link_to 'Show', product %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= paginate @products %>
+<br>
+
+<%= link_to 'New Product', new_product_path %>
