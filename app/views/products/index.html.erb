@@ -3,28 +3,30 @@
 <h1>Products</h1>
 
 <%= form_tag products_path, method: :get do %>
-  <%= label_tag :search %>
-  <%= text_field_tag :search, params[:search] %><br>
+  <div class="form-group">
+    <%= label_tag :search %>
+    <%= text_field_tag :search, params[:search], class: 'form-control' %>
+  </div>
 
-  <br>
+  <div class="form-group row">
+    <div class="col-6">
+      <%= label_tag :min_price %>
+      <%= text_field_tag :min_price, params.dig(:price, :min), name: 'price[min]', class: 'form-control' %>
+    </div>
 
-  <%= label_tag :min_price %>
-  <%= text_field_tag :min_price, params.dig(:price, :min), name: 'price[min]' %><br>
+    <div class="col-6">
+      <%= label_tag :max_price %>
+      <%= text_field_tag :max_price, params.dig(:price, :max), name: 'price[max]', class: 'form-control' %>
+    </div>
+  </div>
 
-  <br>
-
-  <%= label_tag :max_price %>
-  <%= text_field_tag :max_price, params.dig(:price, :max), name: 'price[max]' %><br>
-
-  <br>
-
-  <%= submit_tag 'Search' %>
-  <%= link_to 'Clear', products_path %>
+  <div class="form-group">
+    <%= submit_tag 'Search', class: 'btn btn-primary' %>
+    <%= link_to 'Clear', products_path, class: 'btn btn-link' %>
+  </div>
 <% end %>
 
-<br>
-
-<table>
+<table class="table mt-4">
   <thead>
     <tr>
       <th>Name</th>
@@ -46,8 +48,6 @@
   </tbody>
 </table>
 
-<br>
 <%= paginate @products %>
-<br>
 
-<%= link_to 'New Product', new_product_path %>
+<%= link_to 'New Product', new_product_path, class: 'btn btn-outline-primary mb-5' %>
