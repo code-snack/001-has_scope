@@ -87,6 +87,9 @@ GEM
     ffi (1.10.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    has_scope (0.7.2)
+      actionpack (>= 4.1)
+      activesupport (>= 4.1)
     i18n (1.5.3)
       concurrent-ruby (~> 1.0)
     io-like (0.3.0)
@@ -226,6 +229,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   faker
+  has_scope
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

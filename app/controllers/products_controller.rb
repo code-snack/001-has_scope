@@ -1,15 +1,12 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  has_scope :search
+  has_scope :by_price, type: :hash, using: [:min, :max], as: :price
+  has_scope :page, default: 1
+
   def index
-    @products = Product.all
-
-    @products = @products.where('name ilike ?', "%#{params[:search]}%") if params[:search].present?
-
-    @products = @products.where('price >= ?', params.dig(:price, :min)) if params.dig(:price, :min).present?
-    @products = @products.where('price <= ?', params.dig(:price, :max)) if params.dig(:price, :max).present?
-
-    @products = @products.page(params[:page])
+    @products = apply_scopes(Product.all)
   end
 
   def show
