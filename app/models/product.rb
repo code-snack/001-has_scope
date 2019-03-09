@@ -4,8 +4,8 @@ class Product < ApplicationRecord
   def self.by_price(min, max)
     result = all
 
-    result = result('price >= ?', min) if min.present?
-    result = result('price <= ?', max) if max.present?
+    result = result.where('price >= ?', min) if min.present?
+    result = result.where('price <= ?', max) if max.present?
 
     result
   end
